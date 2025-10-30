@@ -105,25 +105,18 @@
 </head>
 <body>
     <div id="menu">
-        <div class="logo">WAYHACK</div>
+        <div class="logo">wayhack</div>
         <div class="line"></div>
         
         <div class="info">
-            <p>ENTER ACTIVATION KEY</p>
-            <input type="text" id="keyInput" class="key-input" placeholder="XXXX-XXXX-XXXX-XXXX">
-            <button onclick="checkKey()">ACTIVATE</button>
+            <p>Invitation code:</p>
+            <input type="text" id="keyInput" class="key-input" placeholder="enter code...">
+            <button onclick="checkKey()">Send</button>
             <div id="message" class="message"></div>
         </div>
 
         <div class="keys">
-            <h3>TEST KEYS</h3>
-            <div class="key-list">
-                3A7B-9C2D-5E1F-8G4H<br>
-                J6K0-L8M2-N1O4-P7Q9<br>
-                R2S8-T4U0-V6W2-X8Y4<br>
-                Z1A6-B3C8-D5E0-F7G2<br>
-                H9I4-J2K6-L8M0-N4O1
-            </div>
+            
         </div>
     </div>
 
@@ -160,14 +153,14 @@
             const key = input.value.trim().toUpperCase();
 
             if (validKeys.includes(key)) {
-                message.innerHTML = '<span style="color: #00ff00">VALID - REDIRECTING...</span>';
+                message.innerHTML = '<span style="color: #00ff00">get good.</span>';
                 input.disabled = true;
                 
                 setTimeout(() => {
                     window.location.href = 'https://wayhack.netlify.app/';
                 }, 1500);
             } else {
-                message.innerHTML = '<span style="color: #ff4444">INVALID KEY</span>';
+                message.innerHTML = '<span style="color: #ff4444">Х</span>';
             }
         }
 
@@ -179,3 +172,4 @@
     </script>
 </body>
 </html>
+
