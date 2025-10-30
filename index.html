@@ -1,176 +1,181 @@
-<script>
-        $( function() {
-          $( "#menu"  ).draggable();
-        } );
-        
-        function toggleLoadAnimation() {
-          const button = document.querySelector('.info button');
-          const isLoadButton = button.textContent === 'load';
-          
-          if (isLoadButton) {
-            // Анимация загрузки
-            button.textContent = 'loading';
-            button.disabled = true;
-            
-            let dots = 0;
-            const loadingInterval = setInterval(() => {
-              dots = (dots + 1) % 4;
-              button.textContent = 'loading' + '.'.repeat(dots);
-            }, 500);
-            
-            setTimeout(() => {
-              clearInterval(loadingInterval);
-              button.textContent = 'Successfully!';
-              
-              setTimeout(() => {
-                button.textContent = 'Quit';
-                button.disabled = false;
-              }, 1500);
-            }, 3000);
-          } else {
-            // Анимация выхода
-            button.textContent = 'quitting';
-            button.disabled = true;
-            
-            let dots = 0;
-            const quittingInterval = setInterval(() => {
-              dots = (dots + 1) % 4;
-              button.textContent = 'quitting' + '.'.repeat(dots);
-            }, 500);
-            
-            setTimeout(() => {
-              clearInterval(quittingInterval);
-              button.textContent = 'Unloaded!';
-              
-              setTimeout(() => {
-                button.textContent = 'load';
-                button.disabled = false;
-              }, 1500);
-            }, 3000);
-          }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WayHack - Activation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            font-family: 'Courier New', monospace;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-      </script>
 
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    background: #0a0a0a;
-    font-family: 'Courier New', monospace;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+        #menu {
+            width: 300px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 2px;
+            padding: 20px;
+        }
 
-#menu {
-    width: 280px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 2px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
+        .logo {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+        }
 
-.logo {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
+        .line {
+            height: 1px;
+            background: #333;
+            margin: 15px 0;
+        }
 
-.line {
-    height: 1px;
-    background: #333;
-    margin: 15px 0;
-}
+        .info {
+            text-align: center;
+        }
 
-.select {
-    position: relative;
-    margin: 20px 0;
-}
+        .info p {
+            margin: 8px 0;
+            font-size: 12px;
+            color: #ccc;
+        }
 
-select {
-    width: 100%;
-    padding: 8px 12px;
-    background: #2a2a2a;
-    border: 1px solid #444;
-    color: #fff;
-    border-radius: 2px;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-}
+        .key-input {
+            width: 250px;
+            padding: 8px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            text-align: center;
+            margin: 10px 0;
+        }
 
-.select_arrow {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #fff;
-    pointer-events: none;
-}
+        .info button {
+            background: #2a2a2a;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 6px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            margin-top: 5px;
+        }
 
-.info {
-    text-align: center;
-    margin-top: 20px;
-}
+        .info button:hover {
+            background: #333;
+        }
 
-.info p {
-    margin: 8px 0;
-    font-size: 12px;
-    color: #ccc;
-}
+        .message {
+            margin-top: 10px;
+            min-height: 15px;
+            font-size: 11px;
+        }
 
-.info button {
-    background: #2a2a2a;
-    color: #fff;
-    border: 1px solid #444;
-    padding: 8px 24px;
-    border-radius: 2px;
-    cursor: pointer;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    margin-top: 10px;
-    transition: all 0.2s;
-}
+        .keys {
+            margin-top: 15px;
+            padding: 10px;
+            background: #151515;
+            border: 1px solid #222;
+        }
 
-.info button:hover {
-    background: #333;
-    border-color: #555;
-}
+        .keys h3 {
+            margin: 0 0 8px 0;
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+        }
 
-.info button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-</style>
-
-<div id="menu">
-    <div class="logo">WAYHACK - BEST CHEAT CLIENT</div>
-    <div class="line"></div>
-
-    <div id="inside">
-        <div class="select"> 
-            <select> 
-                <option>CS2</option> 
-                <option>CS-GO</option> 
-                <option>Minecraft</option>
-                <option>WorldNet</option>
-            </select> 
-            <div class="select_arrow"></div>
-        </div> 
-
+        .key-list {
+            font-size: 9px;
+            color: #666;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <div class="logo">WAYHACK</div>
+        <div class="line"></div>
+        
         <div class="info">
-            <p>status: safe</p>
-            <p>subscription: FREE</p>
-            <button onclick="toggleLoadAnimation()">load</button>
+            <p>ENTER ACTIVATION KEY</p>
+            <input type="text" id="keyInput" class="key-input" placeholder="XXXX-XXXX-XXXX-XXXX">
+            <button onclick="checkKey()">ACTIVATE</button>
+            <div id="message" class="message"></div>
+        </div>
+
+        <div class="keys">
+            <h3>TEST KEYS</h3>
+            <div class="key-list">
+                3A7B-9C2D-5E1F-8G4H<br>
+                J6K0-L8M2-N1O4-P7Q9<br>
+                R2S8-T4U0-V6W2-X8Y4<br>
+                Z1A6-B3C8-D5E0-F7G2<br>
+                H9I4-J2K6-L8M0-N4O1
+            </div>
         </div>
     </div>
-</div>
+
+    <script>
+        const validKeys = [
+            '3A7B-9C2D-5E1F-8G4H',
+            'J6K0-L8M2-N1O4-P7Q9', 
+            'R2S8-T4U0-V6W2-X8Y4',
+            'Z1A6-B3C8-D5E0-F7G2',
+            'H9I4-J2K6-L8M0-N4O1'
+        ];
+
+        document.getElementById('keyInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
+            
+            if (value.length > 16) {
+                value = value.substr(0, 16);
+            }
+            
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += '-';
+                }
+                formatted += value[i];
+            }
+            
+            e.target.value = formatted;
+        });
+
+        function checkKey() {
+            const input = document.getElementById('keyInput');
+            const message = document.getElementById('message');
+            const key = input.value.trim().toUpperCase();
+
+            if (validKeys.includes(key)) {
+                message.innerHTML = '<span style="color: #00ff00">VALID - REDIRECTING...</span>';
+                input.disabled = true;
+                
+                setTimeout(() => {
+                    window.location.href = 'https://wayhack.netlify.app/';
+                }, 1500);
+            } else {
+                message.innerHTML = '<span style="color: #ff4444">INVALID KEY</span>';
+            }
+        }
+
+        document.getElementById('keyInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkKey();
+            }
+        });
+    </script>
+</body>
+</html>
