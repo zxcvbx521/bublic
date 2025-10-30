@@ -1,32 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скачать пустой TXT файл</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+<script>
+        $( function() {
+          $( "#menu"  ).draggable();
+        } );
+        
+        function toggleLoadAnimation() {
+          const button = document.querySelector('.info button');
+          const isLoadButton = button.textContent === 'load';
+          
+          if (isLoadButton) {
+            // Анимация загрузки
+            button.textContent = 'loading';
+            button.disabled = true;
+            
+            let dots = 0;
+            const loadingInterval = setInterval(() => {
+              dots = (dots + 1) % 4;
+              button.textContent = 'loading' + '.'.repeat(dots);
+            }, 500);
+            
+            setTimeout(() => {
+              clearInterval(loadingInterval);
+              button.textContent = 'Successfully!';
+              
+              setTimeout(() => {
+                button.textContent = 'Quit';
+                button.disabled = false;
+              }, 1500);
+            }, 3000);
+          } else {
+            // Анимация выхода
+            button.textContent = 'quitting';
+            button.disabled = true;
+            
+            let dots = 0;
+            const quittingInterval = setInterval(() => {
+              dots = (dots + 1) % 4;
+              button.textContent = 'quitting' + '.'.repeat(dots);
+            }, 500);
+            
+            setTimeout(() => {
+              clearInterval(quittingInterval);
+              button.textContent = 'Unloaded!';
+              
+              setTimeout(() => {
+                button.textContent = 'load';
+                button.disabled = false;
+              }, 1500);
+            }, 3000);
+          }
         }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Скачать пустой текстовый файл</h1>
-    <p>Нажмите на кнопку ниже, чтобы скачать файл <code>empty.txt</code>.</p>
-    <a href="empty.txt" download>Скачать empty.txt</a>
-</body>
-</html>
+      </script>
+
+
+<div id="menu">
+
+
+    <div class="logo">wayhack</div>
+    <div class="line"></div>
+
+    <div id="inside">
+    <div class="select"> 
+    <select> 
+    <option disabled style="opacity: 0.5;">CS2 [unavailable]</option> 
+    <option>csgo [alpha]</option> 
+    </select> 
+
+    <div class="select_arrow"> 
+    </div>
+
+    </div> 
+    </label> 
+
+
+    <div class="info">
+        <p>status: safe</p>
+        <p>subscription: active</p>
+        <button onclick="toggleLoadAnimation()">load</button>
+    </div>
+    </div>
+
+
+      </div>
