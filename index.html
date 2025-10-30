@@ -23,6 +23,7 @@
             border: 1px solid #333;
             border-radius: 2px;
             padding: 20px;
+            position: relative;
         }
 
         .logo {
@@ -101,22 +102,109 @@
             color: #666;
             line-height: 1.3;
         }
+
+        .no-invite {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .no-invite button {
+            background: transparent;
+            color: #888;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            text-decoration: underline;
+        }
+
+        .no-invite button:hover {
+            color: #ccc;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 2px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .modal h3 {
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .modal-key {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00ff00;
+            margin: 15px 0;
+            padding: 10px;
+            background: #151515;
+            border: 1px solid #333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .modal-close {
+            background: #2a2a2a;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 6px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        .modal-close:hover {
+            background: #333;
+        }
     </style>
 </head>
 <body>
     <div id="menu">
-        <div class="logo">wayhack</div>
+        <div class="logo">WAYLOADER</div>
         <div class="line"></div>
         
         <div class="info">
-            <p>Invitation code:</p>
-            <input type="text" id="keyInput" class="key-input" placeholder="enter code...">
-            <button onclick="checkKey()">Send</button>
+            <p>invite</p>
+            <input type="text" id="keyInput" class="key-input" placeholder="XXXX-XXXX-XXXX-XXXX">
+            <button onclick="checkKey()">submit</button>
             <div id="message" class="message"></div>
         </div>
 
         <div class="keys">
-            
+        </div>
+
+        <div class="no-invite">
+            <button onclick="showInviteKey()">do not have invite?</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="inviteModal" class="modal">
+        <div class="modal-content">
+            <h3>its for you <3</h3>
+            <div class="modal-key" id="modalKey">3A7B-9C2D-5E1F-8G4H</div>
+            <p style="font-size: 11px; color: #ccc; margin: 10px 0;">this key has been automatically copied) </p>
+            <button class="modal-close" onclick="closeModal()">х</button>
         </div>
     </div>
 
@@ -153,14 +241,14 @@
             const key = input.value.trim().toUpperCase();
 
             if (validKeys.includes(key)) {
-                message.innerHTML = '<span style="color: #00ff00">get good.</span>';
+                message.innerHTML = '<span style="color: #00ff00">VALID - REDIRECTING...</span>';
                 input.disabled = true;
                 
                 setTimeout(() => {
-                    window.location.href = 'https://wayhack.netlify.app/';
+                    window.location.href = 'https://wayloader.netlify.app/';
                 }, 1500);
             } else {
-                message.innerHTML = '<span style="color: #ff4444">Х</span>';
+                message.innerHTML = '<span style="color: #ff4444">INVALID KEY</span>';
             }
         }
 
@@ -169,7 +257,38 @@
                 checkKey();
             }
         });
+
+        // Функции для модального окна
+        function showInviteKey() {
+            const modal = document.getElementById('inviteModal');
+            const modalKey = document.getElementById('modalKey');
+            
+            // Выбираем случайный ключ из списка
+            const randomKey = validKeys[Math.floor(Math.random() * validKeys.length)];
+            modalKey.textContent = randomKey;
+            
+            // Пытаемся скопировать ключ в буфер обмена
+            navigator.clipboard.writeText(randomKey).then(() => {
+                console.log('Key copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy key: ', err);
+            });
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('inviteModal');
+            modal.style.display = 'none';
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('inviteModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
-
