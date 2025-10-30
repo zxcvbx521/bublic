@@ -51,33 +51,124 @@
         }
       </script>
 
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #0a0a0a;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#menu {
+    width: 280px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 2px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.line {
+    height: 1px;
+    background: #333;
+    margin: 15px 0;
+}
+
+.select {
+    position: relative;
+    margin: 20px 0;
+}
+
+select {
+    width: 100%;
+    padding: 8px 12px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.select_arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
+    pointer-events: none;
+}
+
+.info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.info p {
+    margin: 8px 0;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.info button {
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 8px 24px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.info button:hover {
+    background: #333;
+    border-color: #555;
+}
+
+.info button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
 
 <div id="menu">
-
-
-    <div class="logo">wayhack</div>
+    <div class="logo">WAYHACK</div>
     <div class="line"></div>
 
     <div id="inside">
-    <div class="select"> 
-    <select> 
-    <option disabled style="opacity: 0.5;">CS2 [unavailable]</option> 
-    <option>csgo [alpha]</option> 
-    </select> 
+        <div class="select"> 
+            <select> 
+                <option>CS2</option> 
+                <option>csgo [alpha]</option> 
+            </select> 
+            <div class="select_arrow"></div>
+        </div> 
 
-    <div class="select_arrow"> 
+        <div class="info">
+            <p>status: safe</p>
+            <p>subscription: active</p>
+            <button onclick="toggleLoadAnimation()">load</button>
+        </div>
     </div>
-
-    </div> 
-    </label> 
-
-
-    <div class="info">
-        <p>status: safe</p>
-        <p>subscription: active</p>
-        <button onclick="toggleLoadAnimation()">load</button>
-    </div>
-    </div>
-
-
-      </div>
+</div>
